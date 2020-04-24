@@ -5,8 +5,7 @@ import org.junit.Test;
 
 import java.io.IOException;
 
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.*;
 
 public class Exercise2Test {
     @Test
@@ -29,5 +28,13 @@ public class Exercise2Test {
         assertFalse(e.isValidParentheses("((123123)1)1"));
         assertFalse(e.isValidParentheses("((((){{}1)1"));
         assertFalse(e.isValidParentheses("((()){}{}{}{((())))1"));
+    }
+
+    @Test
+    public void testCompute() throws IOException {
+        Exercise e = new Exercise();
+        assertEquals(6, e.compute("8 5 - 4 2 - *"));
+        assertEquals(9, e.compute("8 5 - 5 2 - *"));
+        assertEquals(80, e.compute("8 5 * 4 2 - *"));
     }
 }

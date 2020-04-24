@@ -38,4 +38,39 @@ public class Exercise {
         return stack.isEmpty();
     }
 
+    public int compute(String expression) throws IOException {
+        TokenStream ts = new TokenStreamReader(expression);
+        Stack<Token> stack = new Stack<>();
+        while (ts.getToken().tokenType != Token.TokenType.NONE) {
+            Token t = ts.getToken();
+            if (t.tokenType == Token.TokenType.INT) {
+                stack.push(t);
+            }
+            switch (t.tokenType) {
+                case MULT:
+                    int v1 = (Integer) stack.pop().value;
+                    int v2 = (Integer) stack.pop().value;
+                    stack.push(new Token(Token.TokenType.INT, v2 * v1));
+                    break;
+                case DIV:
+                    v1 = (Integer) stack.pop().value;
+                    v2 = (Integer) stack.pop().value;
+                    stack.push(new Token(Token.TokenType.INT, v2 / v1));
+                    break;
+                case MINUS:
+                    v1 = (Integer) stack.pop().value;
+                    v2 = (Integer) stack.pop().value;
+                    stack.push(new Token(Token.TokenType.INT, v2 - v1));
+                    break;
+                case PLUS:
+                    v1 = (Integer) stack.pop().value;
+                    v2 = (Integer) stack.pop().value;
+                    stack.push(new Token(Token.TokenType.INT, v2 + v1));
+                    break;
+            }
+            ts.consumeToken();
+        }
+        return (Integer) stack.pop().value;
+    }
+
 }
