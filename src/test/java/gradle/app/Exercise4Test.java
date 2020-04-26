@@ -3,7 +3,10 @@ package gradle.app;
 import gradle.app.exercise4.*;
 import org.junit.Test;
 
+import java.util.ArrayDeque;
 import java.util.Arrays;
+import java.util.Deque;
+import java.util.LinkedList;
 
 import static junit.framework.TestCase.assertTrue;
 
@@ -80,10 +83,38 @@ public class Exercise4Test {
         }
 
         list2 = new LinkList(new int[]{1, 2, 3, 4, 8});
-         result = Solution.removeNthFromEnd(list2.head, 5);
+        result = Solution.removeNthFromEnd(list2.head, 5);
         while (result != null) {
             System.out.println(result.val);
             result = result.next;
+        }
+    }
+
+    @Test
+    public void testQueuePerformance() {
+        Deque<Integer> q = new LinkedList<>();
+        long begin = System.currentTimeMillis();
+        test(q);
+        long end = System.currentTimeMillis();
+        System.out.println("took " + (end - begin) + "ms");
+
+
+        q = new ArrayDeque<>();
+        begin = System.currentTimeMillis();
+        test(q);
+        end = System.currentTimeMillis();
+        System.out.println("took " + (end - begin) + "ms");
+    }
+
+    private void test(Deque<Integer> q) {
+        for (int i = 0; i < 100; i++) {
+            for (int j = 0; j < 10_000; j++) {
+                q.addLast(j);
+            }
+
+            for (int j = 0; j < 10_000; j++) {
+                q.removeFirst();
+            }
         }
     }
 }
