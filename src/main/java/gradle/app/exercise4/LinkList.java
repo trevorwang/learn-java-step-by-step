@@ -20,7 +20,7 @@ public class LinkList {
         ListNode cur = head;
         ListNode tail = dummy;
         while (cur != null) {
-            if (tail.val < cur.val) {
+            if (tail.val <= cur.val) {
                 tail.next = cur;
                 tail = cur;
                 cur = cur.next;

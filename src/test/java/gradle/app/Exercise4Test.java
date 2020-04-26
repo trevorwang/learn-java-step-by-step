@@ -54,7 +54,7 @@ public class Exercise4Test {
 
     @Test
     public void testLinkList() {
-        int[] array = new int[]{4, 2, 1, 3, Integer.MIN_VALUE, Integer.MIN_VALUE};
+        int[] array = new int[]{Integer.MIN_VALUE, 4, 2, 1, 3, Integer.MIN_VALUE,};
         LinkList list = new LinkList(array);
         ListNode head = list.insertionSortList();
         while (head != null) {
