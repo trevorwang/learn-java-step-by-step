@@ -2,13 +2,15 @@ package gradle.app;
 
 import gradle.app.exercise4.DoubleLinkList;
 import gradle.app.exercise4.DoubleLinkNode;
+import gradle.app.exercise4.LinkList;
+import gradle.app.exercise4.ListNode;
 import org.junit.Test;
 
 import java.util.Arrays;
 
 import static junit.framework.TestCase.assertTrue;
 
-public class Exercise4 {
+public class Exercise4Test {
 
     @Test
     public void testDoubleLinkList() {
@@ -47,6 +49,17 @@ public class Exercise4 {
         list = new DoubleLinkList(initArray);
         for (Integer integer : list.getValueArrayByDesc()) {
             System.out.println(integer);
+        }
+    }
+
+    @Test
+    public void testLinkList() {
+        int[] array = new int[]{4, 2, 1, 3, Integer.MIN_VALUE, Integer.MIN_VALUE};
+        LinkList list = new LinkList(array);
+        ListNode head = list.insertionSortList();
+        while (head != null) {
+            System.out.println(head.val);
+            head = head.next;
         }
     }
 }
