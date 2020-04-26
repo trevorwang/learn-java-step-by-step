@@ -1,7 +1,7 @@
 package gradle.app.exercise4;
 
 public class LinkList {
-    ListNode head;
+    public ListNode head;
 
     public LinkList(int[] array) {
         ListNode dummy = new ListNode(-1);

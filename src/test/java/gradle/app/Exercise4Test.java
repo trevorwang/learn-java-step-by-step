@@ -1,9 +1,6 @@
 package gradle.app;
 
-import gradle.app.exercise4.DoubleLinkList;
-import gradle.app.exercise4.DoubleLinkNode;
-import gradle.app.exercise4.LinkList;
-import gradle.app.exercise4.ListNode;
+import gradle.app.exercise4.*;
 import org.junit.Test;
 
 import java.util.Arrays;
@@ -60,6 +57,33 @@ public class Exercise4Test {
         while (head != null) {
             System.out.println(head.val);
             head = head.next;
+        }
+    }
+
+    @Test
+    public void testAddTwoNumbers() {
+        LinkList list1 = new LinkList(new int[]{1, 2, 3, 4, 8});
+        LinkList list2 = new LinkList(new int[]{1, 2, 3, 4, 8});   ///24681
+        ListNode result = Solution.addTwoNumbers(list1.head, list2.head);
+        while (result != null) {
+            result = result.next;
+        }
+    }
+
+    @Test
+    public void testRemoveNthFromEnd() {
+        LinkList list2 = new LinkList(new int[]{1, 2, 3, 4, 8});
+        ListNode result = Solution.removeNthFromEnd(list2.head, 1);
+        while (result != null) {
+            System.out.println(result.val);
+            result = result.next;
+        }
+
+        list2 = new LinkList(new int[]{1, 2, 3, 4, 8});
+         result = Solution.removeNthFromEnd(list2.head, 5);
+        while (result != null) {
+            System.out.println(result.val);
+            result = result.next;
         }
     }
 }
