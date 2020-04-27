@@ -62,5 +62,16 @@ public class Exercise5Test {
         }
     }
 
+    @Test
+    public void testRemove() {
+        Integer[] array = new Integer[]{233, 100, 7324, 234, 222, 23, 1, 3, 7, 5, 6, 11,};
+        BinarySearchTree<Integer> bst = BinarySearchTree.createTree(array);
+        Node<Integer> toRemove = bst.findNode(7);
+        bst.remove(toRemove);
+        for (Node<Integer> item : bst) {
+            System.out.println(item.data);
+        }
+    }
+
 
 }

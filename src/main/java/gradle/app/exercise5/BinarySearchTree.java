@@ -45,12 +45,16 @@ public class BinarySearchTree<T extends Comparable<T>> implements Iterable<Node<
     }
 
     public boolean contains(T data) {
-        if (data == null) return false;
-        if (root == null) return false;
+        return findNode(data) != null;
+    }
+
+    public Node<T> findNode(T data) {
+        if (data == null) return null;
+        if (root == null) return null;
         Node<T> current = root;
         while (true) {
             if (data.compareTo(current.data) == 0) {
-                return true;
+                return current;
             } else if (data.compareTo(current.data) < 0) {
                 if (current.left == null) {
                     break;
@@ -65,7 +69,7 @@ public class BinarySearchTree<T extends Comparable<T>> implements Iterable<Node<
                 }
             }
         }
-        return false;
+        return null;
     }
 
     public List<Node<T>> preOrder(Node<T> node) {
@@ -140,6 +144,42 @@ public class BinarySearchTree<T extends Comparable<T>> implements Iterable<Node<
             }
         }
         return ptr;
+    }
+
+    public void remove(Node<T> node) {
+        Node<T> parent = node.parent;
+        if (node.left == null && node.right == null) {
+            if (node == root) {
+                root = null;
+                return;
+            }
+
+            if (node == parent.left) {
+                parent.left = null;
+            } else if (node == parent.right) {
+                parent.right = null;
+            }
+        } else if (node.left != null && node.right != null) {
+            Node<T> next = successor(node);
+            node.data = next.data;
+            remove(next);
+
+        } else {
+            Node<T> child;
+            child = Objects.requireNonNullElseGet(node.left, () -> node.right);
+            if (node == root) {
+                child.parent = null;
+                root = child;
+                return;
+            }
+
+            if (node != parent.left) {
+                parent.right = child;
+            } else {
+                parent.left = child;
+            }
+            child.parent = parent;
+        }
     }
 
     public static BinarySearchTree<Integer> createTree(Integer[] array) {
