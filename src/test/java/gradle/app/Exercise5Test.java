@@ -1,6 +1,8 @@
 package gradle.app;
 
+import gradle.app.exercise2.Token;
 import gradle.app.exercise5.BinarySearchTree;
+import gradle.app.exercise5.BinaryTreeExpression;
 import gradle.app.exercise5.FibSolution;
 import gradle.app.exercise5.Node;
 import org.junit.Test;
@@ -73,5 +75,30 @@ public class Exercise5Test {
         }
     }
 
+    @Test
+    public void testBinaryTreeExpression() {
+        testExpression("(1+2)*3");
+        testExpression("(1+2)*3 + 3");
+        testExpression(" 1 * (7+9) / 3");
+    }
 
+    private void testExpression(String expr) {
+        BinaryTreeExpression e = new BinaryTreeExpression(expr);
+        BinarySearchTree<Token> bst = new BinarySearchTree<>();
+        bst.root = e.expression();
+        for (Node<Token> tokenNode : bst.postOrder(bst.root)) {
+            System.out.print(tokenNode.data.value);
+        }
+        System.out.println();
+
+        for (Node<Token> tokenNode : bst.midOrder(bst.root)) {
+            System.out.print(tokenNode.data.value);
+        }
+        System.out.println();
+
+        for (Node<Token> tokenNode : bst.preOrder(bst.root)) {
+            System.out.print(tokenNode.data.value);
+        }
+        System.out.println();
+    }
 }

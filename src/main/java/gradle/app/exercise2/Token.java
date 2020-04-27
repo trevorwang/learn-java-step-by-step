@@ -1,6 +1,11 @@
 package gradle.app.exercise2;
 
-public class Token {
+public class Token implements Comparable<Token> {
+    @Override
+    public int compareTo(Token o) {
+        return (o.tokenType == this.tokenType && o.value.equals(this.value)) ? 0 : -1;
+    }
+
     public enum TokenType {
         LPAR,  // (
         RPAR,  // )
