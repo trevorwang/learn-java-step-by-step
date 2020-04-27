@@ -2,9 +2,9 @@ package gradle.app;
 
 import gradle.app.exercise5.BinarySearchTree;
 import gradle.app.exercise5.FibSolution;
+import gradle.app.exercise5.Node;
 import org.junit.Test;
 
-import java.util.Iterator;
 import java.util.stream.Collectors;
 
 import static org.junit.Assert.assertFalse;
@@ -40,26 +40,25 @@ public class Exercise5Test {
     public void testOrder() {
         Integer[] array = new Integer[]{233, 100, 7324, 234, 222, 23, 1, 3, 7, 5, 6, 11,};
         BinarySearchTree<Integer> bst = BinarySearchTree.createTree(array);
-        String result = bst.preOrder(bst.root).stream().map(String::valueOf).collect(Collectors.joining(","));
+        String result = bst.preOrder(bst.root).stream().map(it -> String.valueOf(it.data)).collect(Collectors.joining(","));
         System.out.println(result);
 
-        result = bst.midOrder(bst.root).stream().map(String::valueOf).collect(Collectors.joining(","));
-        System.out.println(result);
-
-
-        result = bst.postOrder(bst.root).stream().map(String::valueOf).collect(Collectors.joining(","));
-        System.out.println(result);
-
-        result = bst.bfs().stream().map(String::valueOf).collect(Collectors.joining(","));
+        result = bst.midOrder(bst.root).stream().map(it -> String.valueOf(it.data)).collect(Collectors.joining(","));
         System.out.println(result);
 
 
-        result = bst.dfs().stream().map(String::valueOf).collect(Collectors.joining(","));
+        result = bst.postOrder(bst.root).stream().map(it -> String.valueOf(it.data)).collect(Collectors.joining(","));
         System.out.println(result);
 
-        Iterator i = bst.iterator();
-        while (i.hasNext()) {
-            System.out.println(i.next());
+        result = bst.bfs().stream().map(it -> String.valueOf(it.data)).collect(Collectors.joining(","));
+        System.out.println(result);
+
+
+        result = bst.dfs().stream().map(it -> String.valueOf(it.data)).collect(Collectors.joining(","));
+        System.out.println(result);
+
+        for (Node<Integer> item : bst) {
+            System.out.println(item.data);
         }
     }
 

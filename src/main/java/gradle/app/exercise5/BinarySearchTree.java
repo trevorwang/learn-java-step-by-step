@@ -2,8 +2,9 @@ package gradle.app.exercise5;
 
 import java.util.*;
 
-public class BinarySearchTree<T extends Comparable<T>> implements Iterable<T> {
+public class BinarySearchTree<T extends Comparable<T>> implements Iterable<Node<T>> {
     public Node<T> root;
+    public Node<T> minNode;
 
     public boolean insert(T i) {
         Node<T> node = new Node<>(i);
@@ -18,6 +19,13 @@ public class BinarySearchTree<T extends Comparable<T>> implements Iterable<T> {
                 if (current.left == null) {
                     current.left = node;
                     node.parent = current;
+                    if (minNode == null) {
+                        minNode = node;
+                    } else {
+                        if (minNode.data.compareTo(node.data) > 0) {
+                            minNode = node;
+                        }
+                    }
                     break;
                 } else {
                     current = current.left;
@@ -60,9 +68,9 @@ public class BinarySearchTree<T extends Comparable<T>> implements Iterable<T> {
         return false;
     }
 
-    public List<T> preOrder(Node<T> node) {
-        List<T> list = new ArrayList<>();
-        list.add(node.data);
+    public List<Node<T>> preOrder(Node<T> node) {
+        List<Node<T>> list = new ArrayList<>();
+        list.add(node);
         if (node.left != null)
             list.addAll(preOrder(node.left));
         if (node.right != null)
@@ -70,46 +78,46 @@ public class BinarySearchTree<T extends Comparable<T>> implements Iterable<T> {
         return list;
     }
 
-    public List<T> midOrder(Node<T> node) {
-        List<T> list = new ArrayList<>();
+    public List<Node<T>> midOrder(Node<T> node) {
+        List<Node<T>> list = new ArrayList<>();
         if (node.left != null)
             list.addAll(midOrder(node.left));
-        list.add(node.data);
+        list.add(node);
         if (node.right != null)
             list.addAll(midOrder(node.right));
         return list;
     }
 
-    public List<T> postOrder(Node<T> node) {
-        List<T> list = new ArrayList<>();
+    public List<Node<T>> postOrder(Node<T> node) {
+        List<Node<T>> list = new ArrayList<>();
         if (node.left != null)
             list.addAll(postOrder(node.left));
         if (node.right != null)
             list.addAll(postOrder(node.right));
-        list.add(node.data);
+        list.add(node);
         return list;
     }
 
-    public List<T> bfs() {
-        List<T> list = new ArrayList<>();
+    public List<Node<T>> bfs() {
+        List<Node<T>> list = new ArrayList<>();
         Queue<Node<T>> queue = new LinkedList<>();
         if (root != null) queue.add(root);
         while (!queue.isEmpty()) {
             Node<T> node = queue.remove();
-            list.add(node.data);
+            list.add(node);
             if (node.left != null) queue.add(node.left);
             if (node.right != null) queue.add(node.right);
         }
         return list;
     }
 
-    public List<T> dfs() {
-        List<T> list = new ArrayList<>();
+    public List<Node<T>> dfs() {
+        List<Node<T>> list = new ArrayList<>();
         Stack<Node<T>> stack = new Stack<>();
         if (root != null) stack.push(root);
         while (!stack.isEmpty()) {
             Node<T> node = stack.pop();
-            list.add(node.data);
+            list.add(node);
             if (node.right != null) stack.push(node.right);
             if (node.left != null) stack.push(node.left);
         }
@@ -117,25 +125,21 @@ public class BinarySearchTree<T extends Comparable<T>> implements Iterable<T> {
     }
 
 
-    public Node<T> successor(Node<T> n) {
-        if (n == null)
-            return null;
-
-        Node<T> p;
-        if (n.right != null) {
-            p = n.right;
-            while (p.left != null) {
-                p = p.left;
+    public Node<T> successor(Node<T> node) {
+        if (node == null) return null;
+        Node<T> ptr = node.right;
+        if (ptr != null) {
+            while (ptr.left != null) {
+                ptr = ptr.left;
             }
         } else {
-            p = n.parent;
-
-            while (p != null && p.left != n) {
-                n = p;
-                p = n.parent;
+            ptr = node.parent;
+            while (ptr != null && ptr.left != node) {
+                node = ptr;
+                ptr = node.parent;
             }
         }
-        return p;
+        return ptr;
     }
 
     public static BinarySearchTree<Integer> createTree(Integer[] array) {
@@ -147,26 +151,30 @@ public class BinarySearchTree<T extends Comparable<T>> implements Iterable<T> {
     }
 
     @Override
-    public Iterator<T> iterator() {
+    public Iterator<Node<T>> iterator() {
         return new Itr();
     }
 
-    private class Itr implements Iterator<T> {
+    private class Itr implements Iterator<Node<T>> {
+        Node<T> lastNode = null;
         Node<T> nextNode = null;
 
         @Override
         public boolean hasNext() {
-            if (nextNode == null) {
-                nextNode = root;
+            if (lastNode == null) {
+                nextNode = lastNode = minNode;
             } else {
-                nextNode = successor(nextNode);
+                nextNode = successor(lastNode);
             }
             return nextNode != null;
         }
 
         @Override
-        public T next() {
-            return nextNode.data;
+        public Node<T> next() {
+            lastNode = nextNode;
+            Node<T> node = nextNode;
+            nextNode = null;
+            return node;
         }
     }
 
