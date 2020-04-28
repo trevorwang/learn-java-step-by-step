@@ -1,9 +1,6 @@
 package gradle.app;
 
-import gradle.app.exercise6.BubbleSorter;
-import gradle.app.exercise6.Exercise6;
-import gradle.app.exercise6.InsertionSorter;
-import gradle.app.exercise6.Sorter;
+import gradle.app.exercise6.*;
 import org.junit.Test;
 
 import java.util.Arrays;
@@ -40,6 +37,14 @@ public class Exercise6Test {
     public void testInsertionSort() {
         int[] array = new int[]{1, 3, 19, 8, 9, 7, 2};
         Sorter sorter = new InsertionSorter();
+        sorter.sort(array);
+        System.out.println(Arrays.stream(array).mapToObj(String::valueOf).collect(Collectors.joining(",")));
+    }
+
+    @Test
+    public void testChooseSort() {
+        int[] array = new int[]{1, 3, 19, 8, 9, 7, 2};
+        Sorter sorter = new ChooseSorter();
         sorter.sort(array);
         System.out.println(Arrays.stream(array).mapToObj(String::valueOf).collect(Collectors.joining(",")));
     }
