@@ -1,6 +1,7 @@
 package gradle.app;
 
 import gradle.app.exercise6.Sorter;
+import gradle.app.exercise8.CountingSorter;
 import gradle.app.exercise8.Exercise8;
 import gradle.app.exercise8.MergeSorter;
 import gradle.app.exercise8.QuickSorter;
@@ -31,6 +32,14 @@ public class Exercise8Test {
     public void testMergeSort() {
         int[] array = new int[]{13, 1, 3, 19, 8, 9, 7, 2};
         Sorter sorter = new MergeSorter();
+        sorter.sort(array);
+        System.out.println(Arrays.toString(array));
+    }
+
+    @Test
+    public void testCountingSort() {
+        int[] array = new int[]{13, 1, 3, 19, 8, 9, 7, 2};
+        Sorter sorter = new CountingSorter();
         sorter.sort(array);
         System.out.println(Arrays.toString(array));
     }
