@@ -28,7 +28,7 @@ public class Graph {
         vertex[1].visited = true;
 
         while (!q.isEmpty()) {
-            ListHead tmp =q.removeFirst();
+            ListHead tmp = q.removeFirst();
             System.out.println(tmp.data);
 
             AdjacentListNode n = tmp.firstArc;
