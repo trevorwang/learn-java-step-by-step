@@ -4,14 +4,7 @@ public class LinkList {
     public ListNode head;
 
     public LinkList(int[] array) {
-        ListNode dummy = new ListNode(-1);
-        ListNode tmp = dummy;
-        for (int value : array) {
-            ListNode node = new ListNode(value);
-            tmp.next = node;
-            tmp = node;
-        }
-        head = dummy.next;
+        head = Solution.initListNode(array, -1);
     }
 
     public ListNode insertionSortList() {

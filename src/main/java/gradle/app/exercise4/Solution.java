@@ -96,4 +96,48 @@ public class Solution {
         pre.next = null;
         return res;
     }
+
+    public static boolean hasCircle(ListNode head) {
+//        ListNode fast = head;
+//        ListNode slow = head;
+//        while (fast != null && fast.next != null && slow != null) {
+//            fast = fast.next.next;
+//            slow = slow.next;
+//
+//            if (slow == fast) return true;
+//        }
+//        return false;
+
+        ListNode fast = head, slow = head;
+        while (slow != null && fast != null && fast.next != null) {
+            slow = slow.next;
+            fast = fast.next.next;
+            if (slow == fast)
+                return true;
+        }
+        return false;
+    }
+
+    public static ListNode initListNode(int[] array, int circlePos) {
+        ListNode dummy = new ListNode(-1);
+        ListNode tmp = dummy;
+        for (int value : array) {
+            ListNode node = new ListNode(value);
+            tmp.next = node;
+            tmp = node;
+        }
+
+        ListNode pos = dummy.next;
+        if (circlePos >= 0 && array.length > circlePos) {
+            for (int i = 0; i < circlePos; i++) {
+                pos = pos.next;
+            }
+            ListNode tail = pos;
+            while (tail.next != null) {
+                tail = tail.next;
+            }
+            tail.next = pos;
+        }
+        return dummy.next;
+    }
 }

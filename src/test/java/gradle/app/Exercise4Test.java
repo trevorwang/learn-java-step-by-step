@@ -8,6 +8,7 @@ import java.util.Arrays;
 import java.util.Deque;
 import java.util.LinkedList;
 
+import static junit.framework.TestCase.assertFalse;
 import static junit.framework.TestCase.assertTrue;
 
 public class Exercise4Test {
@@ -146,5 +147,26 @@ public class Exercise4Test {
 
         list.head = Solution.rightRotate(list.head, 2);
         System.out.println(list.toString());
+    }
+
+    @Test
+    public void testHasCircle() {
+        int[] array = {1, 2, 3, 4, 5, 6, 7};
+        ListNode head = Solution.initListNode(array, 3);
+        assertTrue(Solution.hasCircle(head));
+
+        head = Solution.initListNode(array, -1);
+        assertFalse(Solution.hasCircle(head));
+
+
+        head = Solution.initListNode(array, 6);
+        assertTrue(Solution.hasCircle(head));
+
+
+        head = Solution.initListNode(new int[]{1}, 0);
+        assertTrue(Solution.hasCircle(head));
+
+        head = Solution.initListNode(new int[]{}, -1);
+        assertFalse(Solution.hasCircle(head));
     }
 }
