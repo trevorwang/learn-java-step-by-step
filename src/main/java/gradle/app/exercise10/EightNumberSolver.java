@@ -89,7 +89,6 @@ public class EightNumberSolver {
                         System.out.println();
                     }
                     System.out.println("*********");
-
                     iter = iter.previous;
                 }
                 return;

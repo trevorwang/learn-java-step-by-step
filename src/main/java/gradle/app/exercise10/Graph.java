@@ -44,4 +44,24 @@ public class Graph {
             }
         }
     }
+
+    public void depthFirstSearch() {
+        depthFirstSearch(vertex[1]);
+    }
+
+    public void depthFirstSearch(ListHead v) {
+        v.visited = true;
+        System.out.println(v.data);
+        AdjacentListNode n = v.firstArc;
+
+        while (n != null) {
+            if (vertex[n.nodeIndex].visited) {
+                n = n.nextArc;
+                continue;
+            }
+
+            depthFirstSearch(vertex[n.nodeIndex]);
+            n = n.nextArc;
+        }
+    }
 }

@@ -13,15 +13,15 @@ public class Exercise10Test {
     public void testGraph() {
         int[] inputs = {
                 7, 9,
-                1, 2,
                 1, 3,
                 1, 5,
+                1, 2,
                 2, 5,
                 2, 3,
                 3, 4,
-                4, 6,
                 4, 7,
-                6, 7
+                4, 6,
+                6, 7,
         };
 
         int v = inputs[0];
@@ -32,7 +32,9 @@ public class Exercise10Test {
         for (int i = 0; i < e; i++) {
             g.addEdge(inputs[++j], inputs[++j]);
         }
-        g.breadthFirstSearch();
+//        g.breadthFirstSearch();
+
+        g.depthFirstSearch();
     }
 
     @Test
