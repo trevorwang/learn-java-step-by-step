@@ -1,5 +1,6 @@
 package gradle.app;
 
+import gradle.app.exercise10.DFSPermutationGenerator;
 import gradle.app.exercise10.EightNumberSolver;
 import gradle.app.exercise10.Graph;
 import org.junit.Test;
@@ -53,5 +54,11 @@ public class Exercise10Test {
             array[i]++;    //数字加1方便进行编码
         }
         new EightNumberSolver().breadFirstSearch(array);
+    }
+
+    @Test
+    public void testDFSPermutationGenerator() {
+        DFSPermutationGenerator generator = new DFSPermutationGenerator(4);
+        generator.make(0);
     }
 }
