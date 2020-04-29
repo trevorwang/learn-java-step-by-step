@@ -37,4 +37,27 @@ public class LinkList {
         }
         return dummy.next;
     }
+
+    public LinkList reverse() {
+        head = Solution.reverse(head);
+        return this;
+    }
+
+    public LinkList reverseKGroup(int k) {
+        head = Solution.reverseKGroup(head, k);
+        return this;
+    }
+
+    @Override
+    public String toString() {
+        StringBuilder sb = new StringBuilder("[");
+        ListNode p = head;
+        while (p != null) {
+            sb.append(p.val);
+            p = p.next;
+            if (p != null) sb.append(',');
+        }
+        sb.append("]");
+        return sb.toString();
+    }
 }

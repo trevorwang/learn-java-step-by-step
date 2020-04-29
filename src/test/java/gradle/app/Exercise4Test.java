@@ -117,4 +117,34 @@ public class Exercise4Test {
             }
         }
     }
+
+    @Test
+    public void testReverseListNode() {
+        LinkList list = new LinkList(new int[]{1, 2, 3, 4, 8});
+        System.out.println(list.toString());
+        System.out.println(list.reverse().toString());
+    }
+
+    @Test
+    public void testReverseKGroupListNode() {
+        LinkList list = new LinkList(new int[]{1, 2, 3, 4, 8});
+        System.out.println(list.toString());
+        System.out.println(list.reverseKGroup(2).toString());
+        System.out.println();
+        System.out.println(list.toString());
+        System.out.println(list.reverseKGroup(3).toString());
+        System.out.println();
+        System.out.println(list.toString());
+        System.out.println(list.reverseKGroup(4).toString());
+
+    }
+
+    @Test
+    public void testRightRotate() {
+        LinkList list = new LinkList(new int[]{1, 2, 3, 4, 5});
+        System.out.println(list.toString());
+
+        list.head = Solution.rightRotate(list.head, 2);
+        System.out.println(list.toString());
+    }
 }

@@ -41,4 +41,59 @@ public class Solution {
         second.next = second.next.next;
         return dummy.next;
     }
+
+
+    public static ListNode reverseKGroup(ListNode head, int k) {
+        ListNode dummy = new ListNode(0);
+        dummy.next = head;
+        ListNode pre = dummy, end = dummy;
+        while (end.next != null) {
+            for (int i = 0; i < k && end != null; i++) {   // find small list per k
+                end = end.next;
+            }
+            if (end == null) break;   // < k, don't reverse
+            ListNode next = end.next;
+            end.next = null;
+            ListNode start = pre.next;
+            pre.next = reverse(start);
+            start.next = next;
+            pre = start;
+            end = pre;
+        }
+        return dummy.next;
+    }
+
+    public static ListNode reverse(ListNode head) {
+        ListNode pre = null;
+        ListNode cur = head;
+        while (cur != null) {
+            ListNode next = cur.next;
+            cur.next = pre;
+            pre = cur;
+            cur = next;
+        }
+        return pre;
+    }
+
+    public static ListNode rightRotate(ListNode head, int k) {
+        if (head == null) return null;
+        ListNode tail = head;
+        int len = 1;
+        while (tail.next != null) {
+            len++;
+            tail = tail.next;
+        }
+
+        int carry = k % len;
+        if (carry == 0) return head;
+
+        ListNode pre = head;
+        for (int i = 0; i < len - carry - 1; i++) {
+            pre = pre.next;
+        }
+        tail.next = head;
+        ListNode res = pre.next;
+        pre.next = null;
+        return res;
+    }
 }
