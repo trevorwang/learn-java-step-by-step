@@ -16,9 +16,9 @@ public class DFSPermutationGenerator {
     public void make(int level) {
         for (int i = 1; i <= N; i++) {
             if (!used[i]) {
+                System.out.println(Arrays.toString(used));
                 used[i] = true;
                 result[level] = i;
-                System.out.println(Arrays.toString(used));
                 make(level + 1);
                 used[i] = false;
             }
