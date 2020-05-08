@@ -169,4 +169,14 @@ public class Exercise4Test {
         head = Solution.initListNode(new int[]{}, -1);
         assertFalse(Solution.hasCircle(head));
     }
+
+    @Test
+    public void testMergeSortedLinkList() {
+        int[] array = {1, 2, 3, 4, 5, 6, 7};
+        ListNode l1 = Solution.initListNode(array, -1);
+        ListNode l2 = Solution.initListNode(array, -1);
+        LinkList linkList = new LinkList(array);
+        linkList.head = Solution.mergeTowLinkListByLoop(l1, l2);
+        System.out.println(linkList.toString());
+    }
 }

@@ -1,6 +1,48 @@
 package gradle.app.exercise4;
 
 public class Solution {
+
+    public static ListNode mergeTowLinkList(ListNode l1, ListNode l2) {
+        if (l1 == null) return l2;
+        if (l2 == null) return l1;
+
+        if (l1.val < l2.val) {
+            l1.next = mergeTowLinkList(l1.next, l2);
+            return l1;
+        } else {
+            l2.next = mergeTowLinkList(l1, l2.next);
+            return l2;
+        }
+    }
+
+    public static ListNode mergeTowLinkListByLoop(ListNode l1, ListNode l2) {
+        if (l1 == null) {
+            return l2;
+        }
+        if (l2 == null) {
+            return l1;
+        }
+
+        ListNode dummy = new ListNode(-1);
+        ListNode p = dummy;
+        while (l1 != null && l2 != null) {
+            ListNode q;
+            if (l1.val < l2.val) {
+                q = l1;
+                l1 = l1.next;
+            } else {
+                q = l2;
+                l2 = l2.next;
+            }
+            q.next = null;
+            p.next = q;
+            p = p.next;
+        }
+        p.next = l1 == null ? l2 : l1;
+
+        return dummy.next;
+    }
+
     public static ListNode addTwoNumbers(ListNode l1, ListNode l2) {
         ListNode dummy = new ListNode(0), cur = dummy;
         int carry = 0;
