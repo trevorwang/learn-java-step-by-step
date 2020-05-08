@@ -155,6 +155,7 @@ public class BinarySearchTree<T extends Comparable<T>> implements Iterable<Node<
                     while (!queue.isEmpty()) {
                         leaves.add(queue.poll().data);
                     }
+                    break;
                 }
             }
         }
