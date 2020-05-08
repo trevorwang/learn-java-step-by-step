@@ -128,6 +128,56 @@ public class BinarySearchTree<T extends Comparable<T>> implements Iterable<Node<
         return list;
     }
 
+    public List<T> getNodesOnDepthByLoop(int depth) {
+        List<T> leaves = new ArrayList<>();
+        Queue<Node<T>> queue = new LinkedList<>();
+        int currDepth = 1;
+        int leavesEnqueue = 0;
+        int leavesToDequeue;
+        queue.add(root);
+        leavesToDequeue = 1;
+        while (!queue.isEmpty()) {
+            leavesToDequeue--;
+            Node<T> node = queue.poll();
+            if (node.left != null) {
+                queue.add(node.left);
+                leavesEnqueue += 1;
+            }
+            if (node.right != null) {
+                queue.add(node.right);
+                leavesEnqueue += 1;
+            }
+            if (leavesToDequeue == 0) {
+                leavesToDequeue = leavesEnqueue;
+                leavesEnqueue = 0;
+                currDepth++;
+                if (currDepth == depth) {
+                    while (!queue.isEmpty()) {
+                        leaves.add(queue.poll().data);
+                    }
+                }
+            }
+        }
+        return leaves;
+    }
+
+
+    public List<Node<T>> getNodesOnDepthByRec(int depth) {
+        List<Node<T>> leaves = new ArrayList<>();
+        getNodesOnDepthByRec(root, depth, leaves);
+        return leaves;
+    }
+
+    private void getNodesOnDepthByRec(Node<T> root, int depth, List<Node<T>> leaves) {
+        if (root == null || depth == 0) return;
+        if (depth == 1) {
+            leaves.add(root);
+        } else {
+            getNodesOnDepthByRec(root.left, depth - 1, leaves);
+            getNodesOnDepthByRec(root.right, depth - 1, leaves);
+        }
+    }
+
 
     public Node<T> successor(Node<T> node) {
         if (node == null) return null;

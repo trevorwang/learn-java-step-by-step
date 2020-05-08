@@ -7,6 +7,8 @@ import gradle.app.exercise5.FibSolution;
 import gradle.app.exercise5.Node;
 import org.junit.Test;
 
+import java.util.Arrays;
+import java.util.Collections;
 import java.util.stream.Collectors;
 
 import static org.junit.Assert.assertFalse;
@@ -80,6 +82,23 @@ public class Exercise5Test {
         testExpression("(1+2)*3");
         testExpression("(1+2)*3 + 3");
         testExpression(" 1 * (7+9) / 3");
+    }
+
+    @Test
+    public void testPrintNodesOnDepth() {
+        Integer[] array = new Integer[]{233, 100, 7324, 234, 222, 23, 1, 3, 7, 5, 6, 11,};
+        BinarySearchTree<Integer> bst = BinarySearchTree.createTree(array);
+        Object[] result = bst.getNodesOnDepthByRec(3).stream().map(it -> it.data).toArray();
+        System.out.println(Arrays.toString(result));
+
+        result = bst.getNodesOnDepthByRec(1).stream().map(it -> it.data).toArray();
+        System.out.println(Arrays.toString(result));
+
+        result = bst.getNodesOnDepthByRec(2).stream().map(it -> it.data).toArray();
+        System.out.println(Arrays.toString(result));
+
+        result = bst.getNodesOnDepthByLoop(2).toArray();
+        System.out.println(Arrays.toString(result));
     }
 
     private void testExpression(String expr) {
