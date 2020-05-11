@@ -1,6 +1,7 @@
 package gradle.app;
 
 import gradle.app.exercise12.Customer;
+import gradle.app.exercise12.Driver;
 import gradle.app.exercise12.Producer;
 import org.junit.Test;
 
@@ -21,5 +22,12 @@ public class Exercise12Test {
         p1.join();
         c1.join();
         c2.join();
+    }
+
+
+    @Test
+    public void testCountDownLatch() {
+        Driver driver = new Driver();
+        driver.run(10);
     }
 }
