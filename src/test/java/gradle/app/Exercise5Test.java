@@ -8,7 +8,6 @@ import gradle.app.exercise5.Node;
 import org.junit.Test;
 
 import java.util.Arrays;
-import java.util.Collections;
 import java.util.stream.Collectors;
 
 import static org.junit.Assert.assertFalse;
@@ -99,6 +98,24 @@ public class Exercise5Test {
 
         result = bst.getNodesOnDepthByLoop(2).toArray();
         System.out.println(Arrays.toString(result));
+    }
+
+    @Test
+    public void testSameTree() {
+
+        Integer[] array = new Integer[]{1, 3, 5, 6, 7, 7324, 234, 233, 222, 100, 23};
+        BinarySearchTree<Integer> bst = BinarySearchTree.createTree(array);
+
+        BinarySearchTree<Integer> bst2 = BinarySearchTree.createTree(array);
+
+        assertTrue(sameTree(bst.root, bst2.root));
+    }
+
+    private boolean sameTree(Node<Integer> t1, Node<Integer> t2) {
+        if (t1 == null && t2 == null) return true;
+        if (t1 == null || t2 == null) return false;
+        if (!t1.data.equals(t2.data)) return false;
+        return sameTree(t1.left, t2.left) && sameTree(t1.right, t2.right);
     }
 
     private void testExpression(String expr) {

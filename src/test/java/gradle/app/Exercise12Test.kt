@@ -1,7 +1,9 @@
 package gradle.app
 
+import gradle.app.algo.Regx
 import gradle.app.exercise12.*
 import org.junit.Assert.assertEquals
+import org.junit.Assert.assertTrue
 import org.junit.Test
 import java.util.*
 
@@ -38,13 +40,25 @@ class Exercise12Test {
         cache.get(1)
         cache.get(3)
         cache.get(4)
+
+        cache.let {  }
     }
 
     @Test
     fun testStrStr() {
-
         assertEquals(2, Solution.strStr("hello", "ll"))
         assertEquals(1, Solution.strStr("mississippi", "issi"))
+    }
 
+    @Test
+    fun testRegx() {
+        assertTrue(Regx.match("".toCharArray(),".*".toCharArray()))
+        assertTrue(Regx.match("abc".toCharArray(),".*".toCharArray()))
+        assertTrue(Regx.match("a".toCharArray(),".*".toCharArray()))
+        assertTrue(Regx.match("a".toCharArray(),".*".toCharArray()))
+        assertTrue(Regx.match("abcccc".toCharArray(),"ab.*".toCharArray()))
+        assertTrue(Regx.match("abcccca".toCharArray(),"a.*ca".toCharArray()))
+        assertTrue(Regx.match("aaaaa".toCharArray(),"aaaaa.*".toCharArray()))
+        assertTrue(Regx.match("abbb".toCharArray(),".bbb".toCharArray()))
     }
 }
