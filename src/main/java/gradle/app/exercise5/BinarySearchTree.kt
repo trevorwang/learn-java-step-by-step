@@ -126,53 +126,19 @@ class BinarySearchTree<T : Comparable<T>?> : Iterable<Node<T>?> {
         return list
     }
 
-    fun getNodesOnDepthByLoop(depth: Int): List<T> {
-        val leaves: MutableList<T> = ArrayList()
-        val queue: Queue<Node<T>?> = LinkedList()
-        var currDepth = 1
-        var leavesEnqueue = 0
-        var leavesToDequeue: Int
-        queue.add(root)
-        leavesToDequeue = 1
-        while (!queue.isEmpty()) {
-            leavesToDequeue--
-            val node = queue.poll()
-            if (node!!.left != null) {
-                queue.add(node.left)
-                leavesEnqueue += 1
-            }
-            if (node.right != null) {
-                queue.add(node.right)
-                leavesEnqueue += 1
-            }
-            if (leavesToDequeue == 0) {
-                leavesToDequeue = leavesEnqueue
-                leavesEnqueue = 0
-                currDepth++
-                if (currDepth == depth) {
-                    while (!queue.isEmpty()) {
-                        leaves.add(queue.poll()!!.data)
-                    }
-                    break
-                }
-            }
-        }
-        return leaves
-    }
-
-    fun getNodesOnDepthByRec(depth: Int): List<Node<T>> {
+    fun nodesAtLevel(depth: Int): List<Node<T>> {
         val leaves: MutableList<Node<T>> = ArrayList()
-        getNodesOnDepthByRec(root, depth, leaves)
+        nodesAtLevel(root, depth, leaves)
         return leaves
     }
 
-    private fun getNodesOnDepthByRec(root: Node<T>?, depth: Int, leaves: MutableList<Node<T>>) {
+    private fun nodesAtLevel(root: Node<T>?, depth: Int, leaves: MutableList<Node<T>>) {
         if (root == null || depth == 0) return
         if (depth == 1) {
             leaves.add(root)
         } else {
-            getNodesOnDepthByRec(root.left, depth - 1, leaves)
-            getNodesOnDepthByRec(root.right, depth - 1, leaves)
+            nodesAtLevel(root.left, depth - 1, leaves)
+            nodesAtLevel(root.right, depth - 1, leaves)
         }
     }
 
@@ -258,6 +224,16 @@ class BinarySearchTree<T : Comparable<T>?> : Iterable<Node<T>?> {
         if (node.left == null && node.right == null) return 1
 
         return leavesCount(node.left) + leavesCount(node.right)
+    }
+
+    fun countAtLevel(k: Int): Int {
+        return countAtLevel(k, root)
+    }
+
+    fun countAtLevel(k: Int, node: Node<T>?): Int {
+        if (node == null) return 0
+        if (k == 1) return 1
+        return countAtLevel(k - 1, node.left) + countAtLevel(k - 1, node.right)
     }
 
     override fun iterator(): MutableIterator<Node<T>> {

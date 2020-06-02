@@ -9,7 +9,6 @@ import gradle.app.exercise5.Node
 import org.junit.Assert
 import org.junit.Before
 import org.junit.Test
-import java.util.*
 import java.util.stream.Collectors
 import kotlin.test.assertEquals
 import kotlin.test.assertFalse
@@ -80,14 +79,13 @@ class Exercise5Test {
 
     @Test
     fun testPrintNodesOnDepth() {
-        var result = bst.getNodesOnDepthByRec(3).stream().map { it: Node<Int> -> it.data }.toArray()
-        println(Arrays.toString(result))
-        result = bst.getNodesOnDepthByRec(1).stream().map { it: Node<Int> -> it.data }.toArray()
-        println(Arrays.toString(result))
-        result = bst.getNodesOnDepthByRec(2).stream().map { it: Node<Int> -> it.data }.toArray()
-        println(Arrays.toString(result))
-        result = bst.getNodesOnDepthByLoop(2).toTypedArray()
-        println(Arrays.toString(result))
+        var result = bst.nodesAtLevel(3).map { it: Node<Int> -> it.data }
+        println(result)
+        result = bst.nodesAtLevel(1).map { it: Node<Int> -> it.data }
+
+        println(result)
+        result = bst.nodesAtLevel(2).map { it: Node<Int> -> it.data }
+        println(result)
     }
 
     @Test
@@ -115,6 +113,19 @@ class Exercise5Test {
     @Test
     fun `Test node count of a binary tree`() {
         assertEquals(array.size, bst.count())
+    }
+
+    @Test
+    fun `node count at level k`() {
+        assertEquals(bst.countAtLevel(1), bst.nodesAtLevel(1).size)
+        assertEquals(bst.countAtLevel(2), bst.nodesAtLevel(2).size)
+    }
+
+    @Test
+    fun `leaves at level k`() {
+        println(bst.nodesAtLevel(1).map { it.data.toString() })
+        println(bst.nodesAtLevel(2).map { it.data.toString() })
+        println(bst.nodesAtLevel(3).map { it.data.toString() })
     }
 
     private fun sameTree(t1: Node<Int>?, t2: Node<Int>?): Boolean {
