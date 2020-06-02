@@ -7,20 +7,29 @@ import gradle.app.exercise5.BinaryTreeExpression
 import gradle.app.exercise5.FibSolution
 import gradle.app.exercise5.Node
 import org.junit.Assert
+import org.junit.Before
 import org.junit.Test
 import java.util.*
 import java.util.stream.Collectors
+import kotlin.test.assertFalse
+import kotlin.test.assertTrue
 
 class Exercise5Test {
+    lateinit var bst: BinarySearchTree<Int>
+
+    @Before
+    fun init() {
+        val array = arrayOf(233, 100, 7324, 234, 222, 23, 1, 3, 7, 5, 6, 11)
+        bst = createTree(array)
+    }
+
     @Test
     fun testBSTContains() {
-        val array = arrayOf(1, 3, 5, 6, 7, 7324, 234, 233, 222, 100, 23)
-        val bst = createTree(array)
-        Assert.assertTrue(bst.contains(1))
-        Assert.assertTrue(bst.contains(7324))
-        Assert.assertTrue(bst.contains(233))
-        Assert.assertTrue(bst.contains(23))
-        Assert.assertFalse(bst.contains(8))
+        assertTrue(bst.contains(1))
+        assertTrue(bst.contains(7324))
+        assertTrue(bst.contains(233))
+        assertTrue(bst.contains(23))
+        assertFalse(bst.contains(8))
     }
 
     @Test
@@ -37,8 +46,6 @@ class Exercise5Test {
 
     @Test
     fun testOrder() {
-        val array = arrayOf(233, 100, 7324, 234, 222, 23, 1, 3, 7, 5, 6, 11)
-        val bst = createTree(array)
         var result = bst.preOrder(bst.root!!).stream().map { it: Node<Int> -> it.data.toString() }.collect(Collectors.joining(","))
         println(result)
         result = bst.midOrder(bst.root!!).stream().map { it: Node<Int> -> it.data.toString() }.collect(Collectors.joining(","))
@@ -56,8 +63,6 @@ class Exercise5Test {
 
     @Test
     fun testRemove() {
-        val array = arrayOf(233, 100, 7324, 234, 222, 23, 1, 3, 7, 5, 6, 11)
-        val bst = createTree(array)
         val toRemove = bst.findNode(7)
         bst.remove(toRemove)
         for (item in bst) {
@@ -74,8 +79,6 @@ class Exercise5Test {
 
     @Test
     fun testPrintNodesOnDepth() {
-        val array = arrayOf(233, 100, 7324, 234, 222, 23, 1, 3, 7, 5, 6, 11)
-        val bst = createTree(array)
         var result = bst.getNodesOnDepthByRec(3).stream().map { it: Node<Int> -> it.data }.toArray()
         println(Arrays.toString(result))
         result = bst.getNodesOnDepthByRec(1).stream().map { it: Node<Int> -> it.data }.toArray()

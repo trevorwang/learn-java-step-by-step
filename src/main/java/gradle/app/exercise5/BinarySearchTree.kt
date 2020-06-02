@@ -177,24 +177,25 @@ class BinarySearchTree<T : Comparable<T>?> : Iterable<Node<T>?> {
     }
 
     fun successor(node: Node<T>?): Node<T>? {
-        var node: Node<T> = node ?: return null
-        var ptr = node.right
+        var pNode: Node<T> = node ?: return null
+        var ptr = pNode.right
         if (ptr != null) {
             while (ptr.left != null) {
                 ptr = ptr.left
             }
         } else {
-            ptr = node.parent
-            while (ptr != null && ptr.left !== node) {
-                node = ptr
-                ptr = node.parent
+            ptr = pNode.parent
+            while (ptr != null && ptr.left !== pNode) {
+                pNode = ptr
+                ptr = pNode.parent
             }
         }
         return ptr
     }
 
     fun remove(node: Node<T>?) {
-        val parent = node!!.parent
+        if (node == null) return
+        val parent = node.parent
         if (node.left == null && node.right == null) {
             if (node === root) {
                 root = null
@@ -210,8 +211,7 @@ class BinarySearchTree<T : Comparable<T>?> : Iterable<Node<T>?> {
             node.data = next!!.data
             remove(next)
         } else {
-            val child: Node<T>
-            child = Objects.requireNonNullElseGet(node.left, { node.right })
+            val child: Node<T> = node.left ?: node.right
             if (node === root) {
                 child.parent = null
                 root = child
