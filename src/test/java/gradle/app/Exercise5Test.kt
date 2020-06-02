@@ -1,11 +1,8 @@
 package gradle.app
 
 import gradle.app.exercise2.Token
-import gradle.app.exercise5.BinarySearchTree
+import gradle.app.exercise5.*
 import gradle.app.exercise5.BinarySearchTree.Companion.createTree
-import gradle.app.exercise5.BinaryTreeExpression
-import gradle.app.exercise5.FibSolution
-import gradle.app.exercise5.Node
 import org.junit.Assert
 import org.junit.Before
 import org.junit.Test
@@ -133,6 +130,13 @@ class Exercise5Test {
         val node = bst.findLCA(bst.findNode(1), bst.findNode(7324))
         println(node?.data)
     }
+
+    @Test
+    fun `distance between two nodes`() {
+        println(distance(bst.root, bst.findNode(1), bst.findNode(7324)))
+        assertEquals(-1, distance(bst.root, bst.findNode(1), bst.findNode(-2)))
+    }
+
 
     private fun sameTree(t1: Node<Int>?, t2: Node<Int>?): Boolean {
         if (t1 == null && t2 == null) return true
