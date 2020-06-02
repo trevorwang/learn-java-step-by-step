@@ -2,7 +2,7 @@ package gradle.app.exercise5
 
 import java.util.*
 
-class BinarySearchTree<T : Comparable<T>?> : Iterable<Node<T>?> {
+class BinarySearchTree<T : Comparable<T>> : Iterable<Node<T>?> {
     @JvmField
     var root: Node<T>? = null
     var minNode: Node<T>? = null
@@ -14,7 +14,7 @@ class BinarySearchTree<T : Comparable<T>?> : Iterable<Node<T>?> {
         }
         var current = this.root!!
         while (true) {
-            if (i!! < current.data) {
+            if (i < current.data) {
                 if (current.left == null) {
                     current.left = node
                     node.parent = current
@@ -47,7 +47,6 @@ class BinarySearchTree<T : Comparable<T>?> : Iterable<Node<T>?> {
     }
 
     fun findNode(data: T): Node<T>? {
-        if (data == null) return null
         if (root == null) return null
         var current: Node<T> = root!!
         while (true) {
@@ -196,7 +195,7 @@ class BinarySearchTree<T : Comparable<T>?> : Iterable<Node<T>?> {
         return leavesCount(root)
     }
 
-    fun depth(node: Node<T>?): Int {
+    private fun depth(node: Node<T>?): Int {
         if (node == null) return 0
         if (node.left == null && node.right == null) return 1
         val leftDepth = depth(node.left)
@@ -213,7 +212,7 @@ class BinarySearchTree<T : Comparable<T>?> : Iterable<Node<T>?> {
         return count(root)
     }
 
-    fun count(node: Node<T>?): Int {
+    private fun count(node: Node<T>?): Int {
         if (node == null) return 0
         if (node.left == null && node.right == null) return 1
         return count(node.left) + count(node.right) + 1
@@ -230,10 +229,15 @@ class BinarySearchTree<T : Comparable<T>?> : Iterable<Node<T>?> {
         return countAtLevel(k, root)
     }
 
-    fun countAtLevel(k: Int, node: Node<T>?): Int {
+    private fun countAtLevel(k: Int, node: Node<T>?): Int {
         if (node == null) return 0
         if (k == 1) return 1
         return countAtLevel(k - 1, node.left) + countAtLevel(k - 1, node.right)
+    }
+
+
+    fun findLCA(a: Node<T>?, b: Node<T>?): Node<T>? {
+        return findLCA(root, a, b)
     }
 
     override fun iterator(): MutableIterator<Node<T>> {

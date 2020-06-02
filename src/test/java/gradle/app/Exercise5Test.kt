@@ -128,6 +128,12 @@ class Exercise5Test {
         println(bst.nodesAtLevel(3).map { it.data.toString() })
     }
 
+    @Test
+    fun `find lowest common ancestor`() {
+        val node = bst.findLCA(bst.findNode(1), bst.findNode(7324))
+        println(node?.data)
+    }
+
     private fun sameTree(t1: Node<Int>?, t2: Node<Int>?): Boolean {
         if (t1 == null && t2 == null) return true
         if (t1 == null || t2 == null) return false
