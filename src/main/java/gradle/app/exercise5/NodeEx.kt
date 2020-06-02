@@ -62,3 +62,18 @@ fun <T : Comparable<T>> isCBT(root: Node<T>?): Boolean {
     }
     return true
 }
+
+fun <T : Comparable<T>> isPostBSTSequence(array: Array<T>, begin: Int, end: Int): Boolean {
+    if (end <= begin) return true
+    val data = array[end]
+    var i = begin
+    while (data > array[i]) {
+        i++
+    }
+
+    for (j in i until end) {
+        if (array[j] < data) return false
+    }
+
+    return isPostBSTSequence(array, begin, i - 1) && isPostBSTSequence(array, i, end - 1)
+}

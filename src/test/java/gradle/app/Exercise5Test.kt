@@ -150,6 +150,12 @@ class Exercise5Test {
         assertFalse(isCBT(bst.root))
     }
 
+    @Test
+    fun `is post order sequence`() {
+        val list = bst.postOrder(bst.root).map { it.data }.toTypedArray()
+        assertTrue(isPostBSTSequence(list, 0, list.size - 1))
+        assertFalse(isPostBSTSequence(bst.preOrder(bst.root).map { it.data }.toTypedArray(), 0, list.size - 1))
+    }
 
     private fun sameTree(t1: Node<Int>?, t2: Node<Int>?): Boolean {
         if (t1 == null && t2 == null) return true
