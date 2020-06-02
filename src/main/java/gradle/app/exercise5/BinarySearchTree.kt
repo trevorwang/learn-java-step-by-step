@@ -246,6 +246,21 @@ class BinarySearchTree<T : Comparable<T>> : Iterable<Node<T>?> {
         return list
     }
 
+    var flatternRoot: Node<T>? = null
+    var flatternPre: Node<T>? = null
+    fun flattern(node: Node<T>?): Node<T>? {
+        if (node == null) return null
+        flattern(node.left)
+        if (flatternRoot == null) {
+            flatternRoot = node
+        }
+        flatternPre?.right = node
+        node.left = flatternPre
+        flatternPre = node
+        flattern(node.right)
+        return flatternRoot
+    }
+
     override fun iterator(): MutableIterator<Node<T>> {
         return Itr()
     }

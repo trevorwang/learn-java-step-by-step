@@ -162,6 +162,17 @@ class Exercise5Test {
         assertTrue(isBST(bst.root))
     }
 
+    @Test
+    fun `binary search tree to sorted linked list`() {
+        val list = bst.flattern(bst.root)
+        var p = list
+        while (p != null) {
+            print("${p.data} ")
+            p = p.right
+        }
+        println()
+    }
+
     private fun sameTree(t1: Node<Int>?, t2: Node<Int>?): Boolean {
         if (t1 == null && t2 == null) return true
         if (t1 == null || t2 == null) return false
