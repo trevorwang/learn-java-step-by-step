@@ -48,9 +48,8 @@ fun <T : Comparable<T>> findAllAncestors(root: Node<T>?, target: Node<T>?, list:
 
 fun <T : Comparable<T>> isCBT(root: Node<T>?): Boolean {
     val queue: Queue<Node<T>> = LinkedList()
-    if (root != null) {
-        queue.add(root)
-    }
+    if (root == null) return false
+    queue.add(root)
 
     while (queue.isNotEmpty()) {
         val cur = queue.poll()
