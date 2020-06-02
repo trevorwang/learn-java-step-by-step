@@ -226,6 +226,29 @@ class BinarySearchTree<T : Comparable<T>?> : Iterable<Node<T>?> {
         }
     }
 
+    fun leavesCount(): Int {
+        return leavesCount(root)
+    }
+
+    fun depth(node: Node<T>?): Int {
+        if (node == null) return 0
+        if (node.left == null && node.right == null) return 1
+        val leftDepth = depth(node.left)
+        val rightDepth = depth(node.right)
+        return 1 + if (leftDepth > rightDepth) leftDepth else rightDepth
+    }
+
+    fun depth(): Int {
+        return depth(this.root)
+    }
+
+    private fun leavesCount(node: Node<T>?): Int {
+        if (node == null) return 0
+        if (node.left == null && node.right == null) return 1
+
+        return leavesCount(node.left) + leavesCount(node.right)
+    }
+
     override fun iterator(): MutableIterator<Node<T>> {
         return Itr()
     }

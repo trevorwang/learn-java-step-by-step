@@ -11,15 +11,16 @@ import org.junit.Before
 import org.junit.Test
 import java.util.*
 import java.util.stream.Collectors
+import kotlin.test.assertEquals
 import kotlin.test.assertFalse
 import kotlin.test.assertTrue
 
 class Exercise5Test {
     lateinit var bst: BinarySearchTree<Int>
+    private val array = arrayOf(233, 100, 7324, 234, 222, 23, 1, 3, 7, 5, 6, 11)
 
     @Before
     fun init() {
-        val array = arrayOf(233, 100, 7324, 234, 222, 23, 1, 3, 7, 5, 6, 11)
         bst = createTree(array)
     }
 
@@ -95,6 +96,20 @@ class Exercise5Test {
         val bst = createTree(array)
         val bst2 = createTree(array)
         Assert.assertTrue(sameTree(bst.root, bst2.root))
+    }
+
+    @Test
+    fun `Test leaves count of binary tree`() {
+        println(bst.leavesCount())
+        assertEquals(1, createTree(arrayOf(1)).leavesCount())
+        assertEquals(2, createTree(arrayOf(3, 1, 4)).leavesCount())
+    }
+
+    @Test
+    fun `Test depth of a binary tree`() {
+        assertEquals(1, createTree(arrayOf(1)).depth())
+        assertEquals(2, createTree(arrayOf(3, 1, 4)).depth())
+        assertEquals(3, createTree(arrayOf(3, 1, 2)).depth())
     }
 
     private fun sameTree(t1: Node<Int>?, t2: Node<Int>?): Boolean {
