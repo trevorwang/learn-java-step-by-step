@@ -157,6 +157,11 @@ class Exercise5Test {
         assertFalse(isPostBSTSequence(bst.preOrder(bst.root).map { it.data }.toTypedArray(), 0, list.size - 1))
     }
 
+    @Test
+    fun `is binary search tree`() {
+        assertTrue(isBST(bst.root))
+    }
+
     private fun sameTree(t1: Node<Int>?, t2: Node<Int>?): Boolean {
         if (t1 == null && t2 == null) return true
         if (t1 == null || t2 == null) return false

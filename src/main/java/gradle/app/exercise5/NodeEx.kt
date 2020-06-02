@@ -77,3 +77,15 @@ fun <T : Comparable<T>> isPostBSTSequence(array: Array<T>, begin: Int, end: Int)
 
     return isPostBSTSequence(array, begin, i - 1) && isPostBSTSequence(array, i, end - 1)
 }
+
+fun <T : Comparable<T>> isBST(root: Node<T>?): Boolean {
+    if (root == null) return true
+    if (root.left != null) {
+        if (root.left.data > root.data) return false
+    }
+
+    if (root.right != null) {
+        if (root.right.data < root.data) return false
+    }
+    return isBST(root.left) && isBST(root.right)
+}
