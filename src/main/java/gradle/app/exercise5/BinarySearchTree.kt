@@ -242,6 +242,17 @@ class BinarySearchTree<T : Comparable<T>?> : Iterable<Node<T>?> {
         return depth(this.root)
     }
 
+
+    fun count(): Int {
+        return count(root)
+    }
+
+    fun count(node: Node<T>?): Int {
+        if (node == null) return 0
+        if (node.left == null && node.right == null) return 1
+        return count(node.left) + count(node.right) + 1
+    }
+
     private fun leavesCount(node: Node<T>?): Int {
         if (node == null) return 0
         if (node.left == null && node.right == null) return 1

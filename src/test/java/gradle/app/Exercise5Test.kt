@@ -112,6 +112,11 @@ class Exercise5Test {
         assertEquals(3, createTree(arrayOf(3, 1, 2)).depth())
     }
 
+    @Test
+    fun `Test node count of a binary tree`() {
+        assertEquals(array.size, bst.count())
+    }
+
     private fun sameTree(t1: Node<Int>?, t2: Node<Int>?): Boolean {
         if (t1 == null && t2 == null) return true
         if (t1 == null || t2 == null) return false
