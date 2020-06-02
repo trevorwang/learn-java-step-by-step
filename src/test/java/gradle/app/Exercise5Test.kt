@@ -144,6 +144,12 @@ class Exercise5Test {
         println(bst.findAllAncestors(bst.findNode(1)).map { it.data })
     }
 
+    @Test
+    fun `is complete binary tree`() {
+
+        assertFalse(isCBT(bst.root))
+    }
+
 
     private fun sameTree(t1: Node<Int>?, t2: Node<Int>?): Boolean {
         if (t1 == null && t2 == null) return true

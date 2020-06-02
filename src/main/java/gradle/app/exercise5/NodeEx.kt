@@ -1,5 +1,7 @@
 package gradle.app.exercise5
 
+import java.util.*
+
 // find lowest common ancestor
 fun <T : Comparable<T>> findLCA(root: Node<T>?, a: Node<T>?, b: Node<T>?): Node<T>? {
     if (root == null || a == null || b == null) return null
@@ -42,4 +44,22 @@ fun <T : Comparable<T>> findAllAncestors(root: Node<T>?, target: Node<T>?, list:
         return true
     }
     return false
+}
+
+fun <T : Comparable<T>> isCBT(root: Node<T>?): Boolean {
+    val queue: Queue<Node<T>> = LinkedList()
+    if (root != null) {
+        queue.add(root)
+    }
+
+    while (queue.isNotEmpty()) {
+        val cur = queue.poll()
+        if (cur.left == null && cur.right != null) return false
+        if (cur.left != null && cur.right == null) {
+            if (cur.left.left != null || cur.left.right != null) return false
+        }
+        if (cur.left != null) queue.offer(cur.left)
+        if (cur.right != null) queue.offer(cur.right)
+    }
+    return true
 }
