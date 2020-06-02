@@ -240,6 +240,12 @@ class BinarySearchTree<T : Comparable<T>> : Iterable<Node<T>?> {
         return findLCA(root, a, b)
     }
 
+    fun findAllAncestors(node: Node<T>?): List<Node<T>> {
+        val list = arrayListOf<Node<T>>()
+        findAllAncestors(root, node, list)
+        return list
+    }
+
     override fun iterator(): MutableIterator<Node<T>> {
         return Itr()
     }

@@ -138,6 +138,13 @@ class Exercise5Test {
     }
 
 
+    @Test
+    fun `find all ancestors`() {
+        println(bst.findAllAncestors(bst.findNode(7324)).map { it.data })
+        println(bst.findAllAncestors(bst.findNode(1)).map { it.data })
+    }
+
+
     private fun sameTree(t1: Node<Int>?, t2: Node<Int>?): Boolean {
         if (t1 == null && t2 == null) return true
         if (t1 == null || t2 == null) return false

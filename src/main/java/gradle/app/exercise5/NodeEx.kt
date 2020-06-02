@@ -32,3 +32,14 @@ fun <T : Comparable<T>> distance(root: Node<T>?, node: Node<T>?, target: Node<T>
     val result = levelNode + levelTarget
     return if (result < 0) -1 else result
 }
+
+
+fun <T : Comparable<T>> findAllAncestors(root: Node<T>?, target: Node<T>?, list: MutableList<Node<T>>): Boolean {
+    if (root == null || target == null) return false
+    if (root == target) return true
+    if (findAllAncestors(root.left, target, list) || findAllAncestors(root.right, target, list)) {
+        list.add(root)
+        return true
+    }
+    return false
+}
